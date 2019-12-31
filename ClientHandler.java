@@ -27,14 +27,17 @@ public class ClientHandler implements Runnable {
 	public void run() {
 		if(finished) return;
 		String request = "";
-		while (!request.equals("stp")) {
+		while (true) {
 			
 			try {
 				request = reciever.readLine();
 			} catch (IOException e) {
 				break;
 			}
-			
+			if(request.equals("stp")) {
+				MSBoot.append("[THREAD] Close request recieved...");
+				break;
+			}
 			if(request.equals("get")) {
 				MSBoot.append("[THREAD] Preparing data...");
 				String send = "got ";
