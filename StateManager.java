@@ -2,6 +2,9 @@ package data;
 
 import static helpers.Artist.debug;
 import static helpers.Artist.hideUI;
+
+import javax.swing.JOptionPane;
+
 import static helpers.Artist.hideChatUI;
 
 import org.lwjgl.input.Keyboard;
@@ -59,6 +62,10 @@ public class StateManager {
 		
 		while (Keyboard.next()) {
 			if (Keyboard.getEventKey() == Keyboard.KEY_LCONTROL && Keyboard.getEventKeyState()) debug = !debug;
+			if(Keyboard.getEventKey() == Keyboard.KEY_T && Keyboard.getEventKeyState() && Artist.canSend) {
+				mp.say(JOptionPane.showInputDialog(null,"Message"));
+				Artist.canSend = false;
+			}
 			if (Keyboard.getEventKey() == Keyboard.KEY_F3 && Keyboard.getEventKeyState()) hideUI = !hideUI;
 			if (Keyboard.getEventKey() == Keyboard.KEY_C && Keyboard.getEventKeyState()) hideChatUI = !hideChatUI;
 			if (Keyboard.getEventKey() == Keyboard.KEY_ESCAPE && Keyboard.getEventKeyState()) mm.choose();
@@ -99,6 +106,8 @@ public class StateManager {
 			if(state == MULTIPLAYER) {
 				infoUI.drawString(0, curY, "C: Toggle Chat.");
 				curY += 30;
+				infoUI.drawString(0, curY, "T: Send Message.");
+				curY += 30;
 			}
 			if(state != MAINMENU) {
 				infoUI.drawString(0, curY, "ESC: Go to main menu.");
@@ -108,11 +117,11 @@ public class StateManager {
 		}
 		if(!hideChatUI && state == MULTIPLAYER) {
 			curY = 0;
-			chatUI.drawString(Artist.Width * 2/3, curY, "CHAT");
+			chatUI.drawString(Artist.Width / 2, curY, "CHAT");
 			curY += 60;
 			for(String s : chats) {
 				if(s != null && s.length() > 0) {
-					chatUI.drawString(Artist.Width * 2/3, curY, s);
+					chatUI.drawString(Artist.Width / 2, curY, s);
 					curY += 30;
 				}
 			}
