@@ -12,7 +12,7 @@ import tile.TileGrid;
 public class ServerPlayer extends Character {
 	
 	private TileGrid grid;
-	public boolean lr=false;
+	private boolean lr=false;
 	private boolean ll=false;
 	private boolean lu=false;
 	private boolean ld=false;
@@ -160,7 +160,11 @@ public class ServerPlayer extends Character {
 			}
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.next()) super.locked = !super.locked;
-		if(System.currentTimeMillis()%(2000/StateManager.framesInLastSecond)<Clock.Delta()*1000) send();
+		if(StateManager.framesInLastSecond > 0) {
+			if(System.currentTimeMillis()%(2000/StateManager.framesInLastSecond)<Clock.Delta()*1000) send();
+		} else {
+			if(System.currentTimeMillis()%10000<Clock.Delta()*1000) send();
+		}
 	}
 	
 	public void send() {
