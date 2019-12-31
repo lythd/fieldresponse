@@ -12,6 +12,7 @@ public class Artist {
 
 	public static int Width, Height, TileWidth, TileHeight, l = 3;
 	public static boolean hideUI = false,hideChatUI = false,debug = false;
+	public static boolean canSend = true;
 	
 	public static void BeginSession(String name) {
 		Width = 1280;
