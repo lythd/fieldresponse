@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import entities.OtherPlayer;
+import helpers.Artist;
 
 public class ServerConnection implements Runnable {
 
@@ -69,6 +70,7 @@ public class ServerConnection implements Runnable {
 					}
 				} else if(broken[0].equals("say")) {
 					StateManager.addChat(serverResponse.substring(4));
+					Artist.canSend = true;
 				}
 			}
 		} catch (IOException e) {
