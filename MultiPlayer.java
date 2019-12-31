@@ -68,6 +68,10 @@ public class MultiPlayer {
 		for(OtherPlayer p : players) p.update();
 	}
 	
+	public void say(String str) {
+		sender.println("say " + str);
+	}
+	
 	public void shutdown() {
 		if(!sk) return;
 		sender.println("stp");
